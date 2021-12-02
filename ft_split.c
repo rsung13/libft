@@ -6,11 +6,24 @@
 /*   By: rsung <rsung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:12:44 by rsung             #+#    #+#             */
-/*   Updated: 2021/11/30 14:36:53 by rsung            ###   ########.fr       */
+/*   Updated: 2021/12/02 19:47:59 by rsung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
+
+static void	ft_clean(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+}
 
 static size_t	ft_word_count(char const *s, char c)
 {
@@ -58,26 +71,25 @@ static char	*ft_ptr_tab(char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
-	size_t	word_count;
-	size_t	i;
 	size_t	j;
 
-	i = 0;
 	j = 0;
-	word_count = ft_word_count(s, c);
-	tab = malloc(sizeof(char *) * (word_count + 1));
-	if (tab == NULL)
+	tab = malloc(sizeof(char *) * (ft_word_count(s, c) + 1));
+	if (!tab)
 		return (NULL);
-	while (s[i] != '\0')
+	while (*s != '\0')
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i] && s[i] != c)
+		while (*s && *s == c)
+			s++;
+		if (*s && *s != c)
 		{
-			tab[j] = ft_ptr_tab(&s[i], c);
-			j++;
-			while (s[i] && s[i] != c)
-				i++;
+			tab[j++] = ft_ptr_tab(s, c);
+			if (!(tab[j - 1]))
+			{
+				ft_clean(tab);
+				return (NULL);
+			}
+			s += ft_strlen(tab[j - 1]);
 		}
 	}
 	tab[j] = 0;
