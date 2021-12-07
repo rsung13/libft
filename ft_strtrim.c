@@ -54,6 +54,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	i = 0;
 	j = 0;
+	if (s1 == NULL)
+		return (NULL);
 	size = ft_str_size(s1, set);
 	tab = malloc(sizeof(char) * size + 1);
 	if (tab == NULL)

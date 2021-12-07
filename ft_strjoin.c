@@ -6,7 +6,7 @@
 /*   By: rsung <rsung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:36:27 by rsung             #+#    #+#             */
-/*   Updated: 2021/11/30 14:38:26 by rsung            ###   ########.fr       */
+/*   Updated: 2021/12/03 19:16:19 by rsung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*tab;
-	size_t	len;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	tab = malloc(sizeof(char) * (len + 1));
+	if (!s1 || !s2)
+		return (NULL);
+	tab = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (tab == NULL)
 		return (NULL);
 	while (s1[i])
@@ -30,7 +30,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		tab[i] = s1[i];
 		i++;
 	}
-	tab[i] = '\0';
 	while (s2[j])
 	{
 		tab[i] = s2[j];

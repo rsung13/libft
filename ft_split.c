@@ -6,7 +6,7 @@
 /*   By: rsung <rsung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:12:44 by rsung             #+#    #+#             */
-/*   Updated: 2021/12/02 19:47:59 by rsung            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:03:36 by rsung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	ft_clean(char **tab)
 		free(tab[i]);
 		i++;
 	}
+	free(tab);
 }
 
 static size_t	ft_word_count(char const *s, char c)
